@@ -1,0 +1,77 @@
+/* src/components/Navbar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa; /* Culoare de fundal deschisă */
+    padding: 10px 20px;
+    border-bottom: 1px solid #dee2e6; /* O margine de separare */
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px; /* Spațiu între logo și link-uri */
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-links li {
+    margin-right: 20px; /* Spațiu între link-uri */
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #343a40; /* Culoare text */
+    transition: color 0.3s; /* Animație la hover */
+}
+
+.navbar-links a:hover {
+    color: #007bff; /* Culoare la hover */
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-user {
+    display: flex;
+    align-items: center;
+}
+
+.username-link {
+    margin-right: 10px; /* Spațiu între nume și buton */
+    font-size: 18px; /* Dimensiune text */
+    font-weight: 500; /* Grosime text */
+    text-decoration: none; /* Fără subliniere */
+    color: #343a40; /* Culoare text */
+}
+
+.username-link:hover {
+    text-decoration: underline; /* Subliniere la hover */
+}
+
+.logout-button {
+    padding: 5px 10px; /* Spațiu interior */
+    background-color: #dc3545; /* Culoare fundal buton */
+    color: white; /* Culoare text buton */
+    border: none;
+    border-radius: 4px; /* Colțuri rotunjite */
+    cursor: pointer; /* Cursor pointer */
+    transition: background-color 0.3s; /* Animație la hover */
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Culoare la hover */
+}
