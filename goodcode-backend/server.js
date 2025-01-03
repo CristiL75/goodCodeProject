@@ -54,12 +54,22 @@ app.get('/', (req, res) => {
 // Ruta pentru autentificarea cu Google
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
+// Exemplu de rută /home pe back-end
+app.get('/home', (req, res) => {
+    // Poți adăuga logica pentru a verifica dacă utilizatorul este logat
+    if (req.isAuthenticated()) {
+        return res.json({ message: "Welcome to Home Page", user: req.user });
+    }
+    return res.status(401).json({ error: "Unauthorized" });
+});
+
+
 // Callback după autentificare cu Google
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => {
         console.log('Authenticated user:', req.user);
-        res.redirect(`http://localhost:3001/home?user=${req.user.username}`);
+        res.redirect(`http://localhost:3000/home?user=${req.user.username}`);
     }
 );
 
@@ -85,17 +95,23 @@ app.post('/signup', async (req, res) => {
             return res.status(400).json({ error: "Username already exists." });
         }
 
+        const existingEmail = await User.findOne({ email });
+        if (existingEmail) {
+            return res.status(400).json({ error: "Email already exists." });
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
 
-        // Redirecționare către pagina de acasă
-        res.redirect(`http://localhost:3001/home?user=${newUser.username}`);
+        // Înlocuiește res.redirect() cu un răspuns JSON
+        res.status(201).json({ message: "User created successfully!", username: newUser.username });
     } catch (error) {
         console.error("Error during signup:", error);
         res.status(500).json({ error: "Internal server error." });
     }
 });
+
 
 
 // Ruta pentru login
@@ -137,7 +153,7 @@ app.get('/api/users', async (req, res) => {
 
 // Endpoint pentru a adăuga o problemă rezolvată pentru utilizator
 app.post('/api/solved-problems', async (req, res) => {
-    const { userId, problemId } = req.body;  // Obținem datele din corpul cererii
+    const { userId, problemId, language } = req.body;  // Obținem datele din corpul cererii
 
     try {
         // Căutăm utilizatorul în baza de date după username
@@ -157,6 +173,7 @@ app.post('/api/solved-problems', async (req, res) => {
         // Creăm obiectul cu detalii despre problema rezolvată
         const newSolvedProblem = {
             problemId,
+            language,
             solvedAt: new Date(),  // Data rezolvării
  
         };

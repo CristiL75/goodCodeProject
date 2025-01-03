@@ -1,49 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import MonacoEditor from '@monaco-editor/react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import MonacoEditor from "@monaco-editor/react";
+import axios from "axios";
 
 const ProblemDetail7 = () => {
-    const { id } = useParams();
+  useEffect(() => {
+    // Adaugă o clasă pe body la montare
+    document.body.classList.add("problem-page");
 
-    const [language, setLanguage] = useState('javascript');
-    const [theme, setTheme] = useState('vs-dark');
-    const [functionHeader, setFunctionHeader] = useState('function myAtoi(s) { }');
-    const [solutionCode, setSolutionCode] = useState('');
-    const [testResults, setTestResults] = useState([]);
-    const [isSuccess, setIsSuccess] = useState(false);
-    const userId = localStorage.getItem('username');
-    console.log("userId:", userId);
-    console.log("id:", id); 
-
-    const getFunctionHeader = (language) => {
-        switch (language) {
-            case 'python':
-                return 'def myAtoi(s):';
-            case 'java':
-                return 'public int myAtoi(String s) { }';
-            case 'csharp':
-                return 'public int MyAtoi(string s) { }';
-            case 'cpp':
-                return 'int myAtoi(string s) { return 0; }';
-            default:
-                return 'function myAtoi(s) { }';
-        }
+    // Elimină clasa la demontare
+    return () => {
+      document.body.classList.remove("problem-page");
     };
-    useEffect(() => {
-        const header = getFunctionHeader(language);
-        setFunctionHeader(header);
-        setSolutionCode(header + '\n');
-    }, [language]);
+  }, []);
 
-    if (id !== '8') {
-        return <div>Problema cu ID-ul {id} nu este disponibilă.</div>;
+  const { id } = useParams();
+
+  const [language, setLanguage] = useState("javascript");
+  const [theme, setTheme] = useState("vs-dark");
+  const [functionHeader, setFunctionHeader] = useState(
+    "function myAtoi(s) { }"
+  );
+  const [solutionCode, setSolutionCode] = useState("");
+  const [testResults, setTestResults] = useState([]);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const userId = localStorage.getItem("username");
+  console.log("userId:", userId);
+  console.log("id:", id);
+
+  const getFunctionHeader = (language) => {
+    switch (language) {
+      case "python":
+        return "def myAtoi(s):";
+      case "java":
+        return "public int myAtoi(String s) { }";
+      case "csharp":
+        return "public int MyAtoi(string s) { }";
+      case "cpp":
+        return "int myAtoi(string s) { return 0; }";
+      default:
+        return "function myAtoi(s) { }";
     }
+  };
+  useEffect(() => {
+    const header = getFunctionHeader(language);
+    setFunctionHeader(header);
+    setSolutionCode(header + "\n");
+  }, [language]);
 
-    const problemDetails = {
-        title: 'String to Integer (atoi)',
-        difficulty: 'Mediu',
-        description: `
+  if (id !== "8") {
+    return <div>Problema cu ID-ul {id} nu este disponibilă.</div>;
+  }
+
+  const problemDetails = {
+    title: "String to Integer (atoi)",
+    difficulty: "Mediu",
+    description: `
         ## String to Integer (atoi)
 
         **Problema:**
@@ -85,59 +97,59 @@ const ProblemDetail7 = () => {
         0 <= s.length <= 200
         s constă din litere englezești (majuscule și minuscule), cifre (0-9), ' ', '+', '-', și '.'.
         \`\`\`
-        `
-    };
+        `,
+  };
 
-    const languageMap = {
-        javascript: 63,
-        python: 71,
-        java: 62,
-        csharp: 51,
-        cpp: 54,
-    };
+  const languageMap = {
+    javascript: 63,
+    python: 71,
+    java: 62,
+    csharp: 51,
+    cpp: 54,
+  };
 
-    const testCases = [
-        {
-            input: { s: "42" },
-            expectedOutput: 42
-        },
-        {
-            input: { s: "   -042" },
-            expectedOutput: -42
-        },
-        {
-            input: { s: "1337c0d3" },
-            expectedOutput: 1337
-        },
-        {
-            input: { s: "0-1" },
-            expectedOutput: 0
-        },
-        {
-            input: { s: "words and 987" },
-            expectedOutput: 0
-        }
-    ];
-    
-    const hiddenTestCases = [
-        {
-            input: { s: "2147483648" },
-            expectedOutput: 2147483647 // Overflow case
-        },
-        {
-            input: { s: "-2147483649" },
-            expectedOutput: -2147483648 // Overflow case
-        },
-        {
-            input: { s: "   +0 123" },
-            expectedOutput: 0
-        }
-    ];
-    
-    const getCompleteCode = (language, userCode) => {
-        switch (language) {
-            case 'javascript':
-                return `
+  const testCases = [
+    {
+      input: { s: "42" },
+      expectedOutput: 42,
+    },
+    {
+      input: { s: "   -042" },
+      expectedOutput: -42,
+    },
+    {
+      input: { s: "1337c0d3" },
+      expectedOutput: 1337,
+    },
+    {
+      input: { s: "0-1" },
+      expectedOutput: 0,
+    },
+    {
+      input: { s: "words and 987" },
+      expectedOutput: 0,
+    },
+  ];
+
+  const hiddenTestCases = [
+    {
+      input: { s: "2147483648" },
+      expectedOutput: 2147483647, // Overflow case
+    },
+    {
+      input: { s: "-2147483649" },
+      expectedOutput: -2147483648, // Overflow case
+    },
+    {
+      input: { s: "   +0 123" },
+      expectedOutput: 0,
+    },
+  ];
+
+  const getCompleteCode = (language, userCode) => {
+    switch (language) {
+      case "javascript":
+        return `
                 ${userCode}
             
                 const runTests = () => {
@@ -207,9 +219,9 @@ const ProblemDetail7 = () => {
             
                 runTests();
                 `;
-            
-            case 'python':
-                return `
+
+      case "python":
+        return `
     ${userCode}
     
     def run_tests():
@@ -247,8 +259,8 @@ const ProblemDetail7 = () => {
     if __name__ == "__main__":
         run_tests()
     `;
-            case 'java':
-                return `
+      case "java":
+        return `
     
     
     import java.util.*;
@@ -349,8 +361,8 @@ const ProblemDetail7 = () => {
         }
     }
     `;
-            case 'csharp':
-                return `
+      case "csharp":
+        return `
     
     
     using System;
@@ -414,8 +426,8 @@ const ProblemDetail7 = () => {
         }
     }
     `;
-            case 'cpp':
-                return `
+      case "cpp":
+        return `
     ${userCode}
     
     #include <iostream>
@@ -484,162 +496,170 @@ const ProblemDetail7 = () => {
         return 0;
     }
     `;
-            default:
-                throw new Error(`Unsupported language: ${language}`);
+      default:
+        throw new Error(`Unsupported language: ${language}`);
+    }
+  };
+  const handleSolutionSubmit = async () => {
+    if (!solutionCode.trim()) {
+      alert("Te rog să completezi soluția înainte de a o trimite.");
+      return;
+    }
+
+    try {
+      const fullSolution = getCompleteCode(language, solutionCode); // Codul complet
+      console.log("Full Solution Code:", fullSolution);
+
+      // Evaluăm codul complet pentru a obține rezultatele testelor
+      const results = eval(fullSolution); // Nu mai facem JSON.parse
+      console.log("Test Results:", results);
+
+      // Verificăm dacă results este un array valid
+      if (!Array.isArray(results)) {
+        throw new Error("Rezultatele testelor nu sunt un array valid.");
+      }
+
+      if (results.length === 0) {
+        alert(
+          "Nu există rezultate ale testelor. Asigură-te că testele au fost rulate corect."
+        );
+        return;
+      }
+
+      setTestResults(results); // Setăm rezultatele testelor în state
+
+      const allTestsPassed = results.every((result) => result.passed); // Verificăm dacă toate testele au trecut
+
+      if (allTestsPassed) {
+        // Afișăm un mesaj de succes pentru utilizator
+        alert("Toate testele au trecut!");
+
+        console.log("User ID:", userId);
+        console.log("Problem ID:", id);
+
+        // Trimitem cererea POST pentru a salva problema rezolvată pe server
+        const response = await fetch(
+          "http://localhost:4000/api/solved-problems",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              userId: userId,
+              problemId: id,
+            }),
+          }
+        );
+
+        const data = await response.json();
+        if (response.ok) {
+          console.log(data.message); // Mesaj de succes din backend
+        } else {
+          console.error(data.message); // Mesaj de eroare din backend
+          alert("A apărut o eroare la salvarea problemei.");
         }
-    };
-    const handleSolutionSubmit = async () => {
-        if (!solutionCode.trim()) {
-            alert('Te rog să completezi soluția înainte de a o trimite.');
-            return;
-        }
-    
-        try {
-            const fullSolution = getCompleteCode(language, solutionCode); // Codul complet
-            console.log("Full Solution Code:", fullSolution);
-    
-            // Evaluăm codul complet pentru a obține rezultatele testelor
-            const results = eval(fullSolution); // Nu mai facem JSON.parse
-            console.log("Test Results:", results);
-    
-            // Verificăm dacă results este un array valid
-            if (!Array.isArray(results)) {
-                throw new Error("Rezultatele testelor nu sunt un array valid.");
-            }
-    
-            if (results.length === 0) {
-                alert('Nu există rezultate ale testelor. Asigură-te că testele au fost rulate corect.');
-                return;
-            }
-    
-            setTestResults(results); // Setăm rezultatele testelor în state
-    
-            const allTestsPassed = results.every(result => result.passed); // Verificăm dacă toate testele au trecut
-    
-            if (allTestsPassed) {
-                // Afișăm un mesaj de succes pentru utilizator
-                alert('Toate testele au trecut!');
+      } else {
+        const failedTests = results.filter((result) => !result.passed);
+        let errorMessage = "Unele teste nu au trecut. Încearcă din nou!\n\n";
+        failedTests.forEach((result, index) => {
+          errorMessage += `Test Case ${index + 1}:\n`;
+          errorMessage += `Input: ${JSON.stringify(result.testCase.input)}\n`;
+          errorMessage += `Expected: ${JSON.stringify(result.expected)}\n`;
+          errorMessage += `Actual: ${JSON.stringify(result.output)}\n`;
+          errorMessage += `Error: ${result.error || "Unknown error"}\n\n`;
+        });
+        alert(errorMessage);
+      }
+    } catch (error) {
+      console.error("Error submitting solution:", error);
+      alert("A apărut o eroare la trimiterea soluției.");
+    }
+  };
 
-                console.log('User ID:', userId);
-                console.log('Problem ID:', id);
+  const handleEditorChange = (value) => {
+    setSolutionCode(value.trim());
+  };
 
-                // Trimitem cererea POST pentru a salva problema rezolvată pe server
-                const response = await fetch('http://localhost:4000/api/solved-problems', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        userId: userId,
-                        problemId: id,
-                    }),
-                });
-                
-    
-                const data = await response.json();
-                if (response.ok) {
-                    console.log(data.message); // Mesaj de succes din backend
-                } else {
-                    console.error(data.message); // Mesaj de eroare din backend
-                    alert('A apărut o eroare la salvarea problemei.');
-                }
-            } else {
-                const failedTests = results.filter(result => !result.passed);
-                let errorMessage = 'Unele teste nu au trecut. Încearcă din nou!\n\n';
-                failedTests.forEach((result, index) => {
-                    errorMessage += `Test Case ${index + 1}:\n`;
-                    errorMessage += `Input: ${JSON.stringify(result.testCase.input)}\n`;
-                    errorMessage += `Expected: ${JSON.stringify(result.expected)}\n`;
-                    errorMessage += `Actual: ${JSON.stringify(result.output)}\n`;
-                    errorMessage += `Error: ${result.error || 'Unknown error'}\n\n`;
-                });
-                alert(errorMessage);
-            }
-        } catch (error) {
-            console.error('Error submitting solution:', error);
-            alert('A apărut o eroare la trimiterea soluției.');
-        }
-    };
-    
-    const handleEditorChange = (value) => {
-        setSolutionCode(value.trim());
-    };
-    
+  return (
+    <div className="problem2-container">
+      <div className="problem2-details">
+        <h1>{problemDetails.title}</h1>
+        <p>
+          Problema cu ID-ul: <b>{id}</b>
+        </p>
+        <p>
+          Dificultate:{" "}
+          <span className="difficulty">{problemDetails.difficulty}</span>
+        </p>
+        <div
+          style={{
+            whiteSpace: "pre-wrap",
+            fontSize: "16px",
+            lineHeight: "1.6",
+          }}
+          dangerouslySetInnerHTML={{ __html: problemDetails.description }}
+        />
+      </div>
 
-    return (
-        <div style={{ display: 'flex', height: '100vh', fontFamily: 'Arial, sans-serif' }}>
-            <div style={{ width: '50%', padding: '20px', borderRight: '1px solid #ddd', overflowY: 'auto' }}>
-                <h1>{problemDetails.title}</h1>
-                <p>Problema cu ID-ul: <b>{id}</b></p>
-                <p>Dificultate: <span style={{ color: 'orange' }}>{problemDetails.difficulty}</span></p>
-                <div style={{ whiteSpace: 'pre-wrap', fontSize: '16px', lineHeight: '1.6' }} dangerouslySetInnerHTML={{ __html: problemDetails.description }} />
-            </div>
-
-            <div style={{ width: '50%', padding: '10px', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'space-between' }}>
-                    <div>
-                        <label><b>Limbaj:</b>
-                            <select value={language} onChange={(e) => setLanguage(e.target.value)}>
-                                <option value="javascript">JavaScript</option>
-                                <option value="python">Python</option>
-                                <option value="java">Java</option>
-                                <option value="csharp">C#</option>
-                                <option value="cpp">C++</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div>
-                        <label><b>Temă:</b>
-                            <select value={theme} onChange={(e) => setTheme(e.target.value)}>
-                                <option value="vs-dark">Dark</option>
-                                <option value="light">Light</option>
-                                <option value="hc-black">High Contrast</option>
-                            </select>
-                        </label>
-                    </div>
-                </div>
-
-                <div style={{ flex: 1 }}>
-                    <MonacoEditor
-                        height="100%"
-                        language={language}
-                        value={solutionCode}
-                        theme={theme}
-                        onChange={handleEditorChange}
-                        options={{
-                            fontSize: 18,
-                            wordWrap: 'on',
-                        }}
-                    />
-                </div>
-
-                <button
-                    onClick={handleSolutionSubmit}
-                    style={{
-                        marginTop: '20px',
-                        padding: '15px 30px',
-                        fontSize: '18px',
-                        backgroundColor: '#4CAF50',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '5px',
-                        cursor: 'pointer',
-                    }}
-                >
-                    Trimite soluția
-                </button>
-
-                <div style={{ marginTop: '20px', padding: '10px', border: '1px solid #ddd', backgroundColor: '#f4f4f4' }}>
-                    <h3>Rezultate:</h3>
-                    <pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(testResults, null, 2)}</pre>
-                </div>
-
-                {isSuccess && (
-                    <div style={{ marginTop: '20px', padding: '10px', backgroundColor: '#d4edda', color: '#155724' }}>
-                        <strong>Succes!</strong> Toate testele au trecut.
-                    </div>
-                )}
-            </div>
+      <div className="pb2-editor-container">
+        <div className="editor-actions">
+          <div>
+            <label>
+              <b>Limbaj:</b>
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+              >
+                <option value="javascript">JavaScript</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="csharp">C#</option>
+                <option value="cpp">C++</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label>
+              <b>Temă:</b>
+              <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+                <option value="vs-dark">Dark</option>
+                <option value="light">Light</option>
+                <option value="hc-black">High Contrast</option>
+              </select>
+            </label>
+          </div>
         </div>
-    );
+
+        <div className="editor-container">
+          <MonacoEditor
+            height="80vh" /* sau orice altă valoare de înălțime */
+            language={language}
+            value={solutionCode}
+            theme={theme}
+            onChange={handleEditorChange}
+            options={{
+              fontSize: 20 /* Crește dimensiunea fontului */,
+              wordWrap: "on",
+            }}
+          />
+        </div>
+
+        <button onClick={handleSolutionSubmit}>Trimite soluția</button>
+
+        <div className="test-results">
+          <h3>Rezultate:</h3>
+          <pre style={{ whiteSpace: "pre-wrap" }}>
+            {JSON.stringify(testResults, null, 2)}
+          </pre>
+        </div>
+
+        {isSuccess && (
+          <div className="success-message">
+            <strong>Succes!</strong> Toate testele au trecut.
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default ProblemDetail7;

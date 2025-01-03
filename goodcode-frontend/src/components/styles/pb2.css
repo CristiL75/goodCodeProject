@@ -1,0 +1,117 @@
+.problem-page {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f0f4f8;
+}
+
+.problem2-container {
+  margin-top: 50px;
+  display: flex;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.problem2-details {
+  width: 50%;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.problem2-details h1 {
+  color: #333;
+  font-size: 28px;
+}
+
+.problem2-details p {
+  font-size: 16px;
+  color: #555;
+}
+
+.problem2-details b {
+  font-weight: bold;
+}
+
+.problem2-details .difficulty {
+  color: #ff9900;
+}
+
+.pb2-editor-container {
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.pb2-editor-container select {
+  padding: 8px 15px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.pb2-editor-container label {
+  font-size: 16px;
+  margin-right: 20px;
+}
+
+.pb2-editor-container .editor-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.pb2-editor-container .editor-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.pb2-editor-container button {
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pb2-editor-container button:hover {
+  background-color: #45a049;
+}
+
+.test-results {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.test-results pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: #282c34;
+  color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.success-message {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}

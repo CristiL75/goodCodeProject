@@ -1,0 +1,75 @@
+.problems-page {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  background-color: #f0f4f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #333;
+}
+
+.problems--container {
+  margin-top: 60px;
+  margin-bottom: 20px;
+  width: 90%;
+  max-width: 900px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.problems--container h1 {
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+.problems--container p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.problem-card {
+  padding: 20px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.problem-card:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.problem-card h2 {
+  color: #007bff;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.problem-card p {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.problem-card .difficulty-ușor {
+  color: green;
+}
+
+.problem-card .difficulty-mediu {
+  color: orange;
+}
+
+.problem-card .difficulty-grea {
+  color: red;
+}

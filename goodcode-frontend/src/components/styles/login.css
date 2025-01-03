@@ -1,0 +1,110 @@
+.login-page {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #ff8c00, #e65100);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Animație pentru un gradient dinamic */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.login--container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+}
+
+.h2--lgn {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form--lgn {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form--lgn input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.form--lgn button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form--lgn button:hover {
+  background-color: #0056b3;
+}
+
+.login--google {
+  margin: 15px 0;
+}
+
+.login--google button {
+  padding: 10px 15px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #ff812d;
+}
+
+.login--google button:hover {
+  background-color: #d3621d;
+}
+
+.err-lgn {
+  color: red;
+  margin-bottom: 15px;
+}
+
+.login--signup {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.login--signup a {
+  color: #007bff;
+}
+
+.login--signup a:hover {
+  text-decoration: underline;
+}
+
+.noAcc--lgn {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333;
+}

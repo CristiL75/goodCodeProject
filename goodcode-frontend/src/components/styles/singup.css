@@ -1,0 +1,91 @@
+.singup-page {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #ff8c00, #e65100);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Animație pentru gradient */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.singup--container {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.h2--sgn {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form--singup {
+  display: flex;
+  flex-direction: column;
+}
+
+.form--singup > div {
+  margin-bottom: 20px;
+}
+
+.form--singup > div > label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+}
+
+.form--singup input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.form--singup input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.singup--btn {
+  background-color: #ff812d;
+  color: white;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.singup--btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.singup--btn:hover:not(:disabled) {
+  background-color: #ff6a00;
+}
